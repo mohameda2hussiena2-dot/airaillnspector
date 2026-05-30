@@ -1,0 +1,121 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "System users with roles and permissions",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "username": { "type": "string" },
+        "role_id": { "type": "string" },
+        "permissions": { "type": "object" },
+        "profile_picture": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "username", "role_id"]
+    },
+    "Role": {
+      "title": "Role",
+      "description": "User roles and their permissions",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "permissions": { "type": "object" },
+        "is_custom": { "type": "boolean" }
+      },
+      "required": ["name", "permissions"]
+    },
+    "AuditLog": {
+      "title": "Audit Log",
+      "description": "Recording administrative actions",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string" },
+        "action": { "type": "string" },
+        "details": { "type": "string" },
+        "target_user": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "EngineeringTask": {
+      "title": "Engineering Task",
+      "description": "Tasks assigned to engineers",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "in-progress", "completed"] },
+        "assigned_to": { "type": "string" },
+        "due_date": { "type": "string", "format": "date" },
+        "created_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "AiFeedback": {
+      "title": "AI Feedback",
+      "description": "User feedback on AI inspections",
+      "type": "object",
+      "properties": {
+        "inspection_id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Model3D": {
+      "title": "3D Model",
+      "description": "Manage 3D engineering models",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "version": { "type": "string" },
+        "engineer": { "type": "string" },
+        "last_modified": { "type": "string", "format": "date-time" }
+      }
+    },
+    "TrackInspection": {
+      "title": "Track Inspection",
+      "description": "Railway track inspection data including defects and locations",
+      "type": "object",
+      "properties": {
+        "timestamp": { "type": "string", "format": "date-time" },
+        "imageUrl": { "type": "string" },
+        "location": {
+          "type": "object",
+          "properties": {
+            "lat": { "type": "number" },
+            "lng": { "type": "number" },
+            "altitude": { "type": "number" }
+          }
+        },
+        "defects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "type": "string" },
+              "severity": { "type": "string" },
+              "confidence": { "type": "number" },
+              "box": { "type": "object" },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "summary": { "type": "string" },
+        "reviewed": { "type": "boolean" }
+      },
+      "required": ["timestamp", "location", "defects"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": { "schema": "User", "description": "User profiles" },
+    "/roles/{roleId}": { "schema": "Role", "description": "Definitions for user roles" },
+    "/audit_logs/{logId}": { "schema": "AuditLog", "description": "Admin activity history" },
+    "/tasks/{taskId}": { "schema": "EngineeringTask", "description": "Maintenance and engineering tasks" },
+    "/ai_feedback/{feedbackId}": { "schema": "AiFeedback", "description": "Feedback on AI detection quality" },
+    "/models_3d/{modelId}": { "schema": "Model3D", "description": "Engineering 3D assets" },
+    "/inspections/{inspectionId}": { "schema": "TrackInspection", "description": "Railway track inspection record" }
+  }
+}

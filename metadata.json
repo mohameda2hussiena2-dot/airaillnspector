@@ -1,0 +1,6 @@
+{
+  "name": "AI Rail Inspector",
+  "description": "Professional AI-powered railway infrastructure inspection and real-time personnel monitoring platform. Features include CEO command dashboard, live telemetry, and automated maintenance planning.",
+  "requestFramePermissions": ["geolocation", "camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API", "Real-time Telemetry", "RBAC Security", "Audit Logging"]
+}

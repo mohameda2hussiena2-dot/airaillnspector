@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Cairo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", "Cairo", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-[#030712] text-slate-100 antialiased;
+  }
+}
+
+/* Beautiful custom premium glassmorphic effects */
+.glass-panel {
+  background: rgba(11, 17, 34, 0.45);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.glass-panel-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(11, 17, 34, 0.65);
+  border-color: rgba(59, 130, 246, 0.25);
+  box-shadow: 0 30px 60px rgba(37, 99, 235, 0.15), 0 10px 30px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Scrollbars */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(3, 7, 18, 0.3);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Leaflet map styling */
+.leaflet-container {
+  background: #030712 !important;
+}
+
+.leaflet-tile-pane {
+  filter: brightness(0.55) invert(1) contrast(3.5) hue-rotate(205deg) saturate(0.25) brightness(0.65);
+}
+
+/* Fine-tuned professional scan effect */
+@keyframes scan-line {
+  0% {
+    top: -5%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    top: 105%;
+    opacity: 0;
+  }
+}
+
+/* Glow filters for professional severity metrics */
+.shadow-premium-blue {
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.15);
+}
+
+.shadow-premium-cyan {
+  box-shadow: 0 0 25px rgba(6, 182, 212, 0.15);
+}
+
+.shadow-premium-rose {
+  box-shadow: 0 0 25px rgba(244, 63, 94, 0.25);
+}
+
+.shadow-premium-amber {
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.2);
+}
+
+/* ==========================================
+   PREMIUM HIGH-CONTRAST LIGHT MODE OVERRIDES
+   ========================================== */
+
+/* Triggers when html has light class, or doesn't have dark class */
+html:not(.dark) {
+  --bg-app: #f1f5f9;                 /* Light grayish blue background */
+  --bg-sidebar: #ffffff;             /* Crisp white sidebar */
+  --bg-header: rgba(255, 255, 255, 0.75); /* Translucent white header */
+  --bg-card: #ffffff;                /* Solid white cards */
+  --text-main: #0f172a;              /* Slate-900 for high-contrast text */
+  --text-sub: #475569;               /* Slate-600 for supporting text */
+  --text-muted: #64748b;             /* Slate-500 for captions */
+  --border-light: rgba(0, 0, 0, 0.08); /* Soft dark border */
+  --border-card: rgba(0, 0, 0, 0.06);
+}
+
+/* Base resets & transitions */
+html, body, main, header, aside, div, p, span, h1, h2, h3, h4, h5, button {
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html:not(.dark) body {
+  background-color: var(--bg-app) !important;
+  color: var(--text-main) !important;
+}
+
+html:not(.dark) main {
+  background-color: var(--bg-app) !important;
+}
+
+/* Sidebar and Navigation */
+html:not(.dark) aside {
+  background-color: var(--bg-sidebar) !important;
+  border-color: var(--border-light) !important;
+}
+
+html:not(.dark) aside button {
+  color: var(--text-sub) !important;
+}
+
+html:not(.dark) aside button:hover {
+  color: var(--text-main) !important;
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+html:not(.dark) aside button .w-8.h-8 {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+html:not(.dark) aside button.text-white {
+  color: #2563eb !important; /* blue-600 for active item */
+}
+
+html:not(.dark) aside button.text-white .w-8.h-8 {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+html:not(.dark) aside button.text-white .text-white {
+  color: #2563eb !important;
+}
+
+/* Header Overrides */
+html:not(.dark) header {
+  background-color: var(--bg-header) !important;
+  border-color: var(--border-light) !important;
+  backdrop-filter: blur(20px);
+}
+
+html:not(.dark) header input {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: var(--text-main) !important;
+}
+
+html:not(.dark) header input::placeholder {
+  color: #94a3b8 !important;
+}
+
+html:not(.dark) header button {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: var(--text-sub) !important;
+}
+
+html:not(.dark) header button:hover {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+  color: var(--text-main) !important;
+}
+
+html:not(.dark) header .text-white {
+  color: var(--text-main) !important;
+}
+
+html:not(.dark) header .text-slate-500 {
+  color: var(--text-muted) !important;
+}
+
+/* Glass Panels and Cards */
+html:not(.dark) .glass-panel {
+  background: var(--bg-card) !important;
+  border-color: var(--border-card) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+}
+
+html:not(.dark) .glass-panel-hover:hover {
+  background: #ffffff !important;
+  border-color: rgba(37, 99, 235, 0.2) !important;
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.06), 0 1px 5px rgba(37, 99, 235, 0.03) !important;
+}
+
+/* Global Container backgrounds and colors */
+html:not(.dark) .bg-[#020617] {
+  background-color: var(--bg-app) !important;
+}
+
+/* Sub-card utilities */
+html:not(.dark) .bg-slate-950,
+html:not(.dark) .bg-slate-900 {
+  background-color: var(--bg-card) !important;
+}
+
+html:not(.dark) .bg-slate-950\/40,
+html:not(.dark) .bg-slate-950\/45,
+html:not(.dark) .bg-slate-950\/60,
+html:not(.dark) .bg-slate-950\/80,
+html:not(.dark) .bg-slate-950\/95,
+html:not(.dark) .bg-slate-900\/50,
+html:not(.dark) .bg-slate-950\/90 {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-card) !important;
+}
+
+html:not(.dark) .bg-white\/5 {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+html:not(.dark) .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+html:not(.dark) .bg-white\/\[0\.02\] {
+  background-color: rgba(0, 0, 0, 0.01) !important;
+}
+
+/* Borders */
+html:not(.dark) .border-white\/5 {
+  border-color: var(--border-card) !important;
+}
+
+html:not(.dark) .border-white\/10 {
+  border-color: var(--border-light) !important;
+}
+
+html:not(.dark) .divide-white\/5 > * + * {
+  border-color: var(--border-card) !important;
+}
+
+/* Specific text color overrides */
+html:not(.dark) .text-white {
+  color: var(--text-main) !important;
+}
+
+html:not(.dark) .text-slate-100 {
+  color: var(--text-main) !important;
+}
+
+html:not(.dark) .text-slate-200 {
+  color: var(--text-main) !important;
+}
+
+html:not(.dark) .text-slate-300 {
+  color: var(--text-sub) !important;
+}
+
+html:not(.dark) .text-slate-400 {
+  color: var(--text-muted) !important;
+}
+
+html:not(.dark) .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+/* Blue & Neon accents */
+html:not(.dark) .text-blue-400 {
+  color: #2563eb !important; /* blue-600 */
+}
+
+html:not(.dark) .bg-blue-500\/10 {
+  background-color: rgba(37, 99, 235, 0.08) !important;
+}
+
+html:not(.dark) .border-blue-500\/20 {
+  border-color: rgba(37, 99, 235, 0.15) !important;
+}
+
+html:not(.dark) .text-blue-500 {
+  color: #1d4ed8 !important; /* blue-700 */
+}
+
+html:not(.dark) .text-emerald-400 {
+  color: #059669 !important; /* emerald-600 */
+}
+
+html:not(.dark) .bg-emerald-500\/10 {
+  background-color: rgba(5, 150, 105, 0.08) !important;
+}
+
+html:not(.dark) .text-amber-400 {
+  color: #d97706 !important; /* amber-600 */
+}
+
+html:not(.dark) .bg-amber-500\/10 {
+  background-color: rgba(217, 119, 6, 0.08) !important;
+}
+
+html:not(.dark) .text-red-400 {
+  color: #dc2626 !important; /* red-600 */
+}
+
+html:not(.dark) .bg-red-500\/10 {
+  background-color: rgba(220, 38, 38, 0.08) !important;
+}
+
+/* Sync Indicators & Badges */
+html:not(.dark) .bg-green-500\/10 {
+  background-color: rgba(16, 185, 129, 0.1) !important;
+}
+
+html:not(.dark) .text-green-400 {
+  color: #059669 !important;
+}
+
+/* User profile details overview dropdown in header */
+html:not(.dark) #user-profile-dropdown-container div.bg-slate-950\/95 {
+  background-color: #ffffff !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-light) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+html:not(.dark) #user-profile-dropdown-container .border-b {
+  border-color: var(--border-card) !important;
+}
+
+/* Map specific overrides */
+html:not(.dark) .leaflet-tile-pane {
+  filter: none !important; /* Normal colorful map in light mode */
+}
+
+html:not(.dark) .leaflet-container {
+  background: #f1f5f9 !important;
+}
+
+/* Cyberbackground styling */
+html:not(.dark) .cyber-grid,
+html:not(.dark) .cyber-grid-line,
+html:not(.dark) .cyber-scan {
+  opacity: 0.04 !important; /* Minimal technical background in light mode */
+}
+
+/* Modals & Dropdowns */
+html:not(.dark) .bg-slate-950\/90 {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Charts Tooltips */
+html:not(.dark) .recharts-default-tooltip {
+  background-color: #ffffff !important;
+  border-color: var(--border-light) !important;
+  color: var(--text-main) !important;
+}
+

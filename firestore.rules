@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role_id == 'admin' ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.permissions.isAdmin == true
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isOwner(userId) || isAdmin();
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin() && userId != request.auth.uid;
+    }
+
+    // Roles
+    match /roles/{roleId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // Audit Logs
+    match /audit_logs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isSignedIn();
+    }
+
+    // Tasks
+    match /tasks/{taskId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+    }
+
+    // AI Feedback
+    match /ai_feedback/{feedbackId} {
+      allow read: if isAdmin();
+      allow create: if isSignedIn();
+    }
+
+    // 3D Models
+    match /models_3d/{modelId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // Track Inspections
+    match /inspections/{inspectionId} {
+      allow read, write: if isSignedIn();
+    }
+
+    // Crew Intercom
+    match /crew_intercom/{messageId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+    }
+  }
+}
